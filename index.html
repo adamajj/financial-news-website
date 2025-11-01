@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-dark: #0f172a;
-            --primary-blue: #1e40af;
-            --accent-blue: #3b82f6;
-            --light-blue: #60a5fa;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --bg-light: #f8fafc;
+            --primary-dark: #1a1a1a;
+            --primary-blue: #1e3a8a;
+            --accent-blue: #2563eb;
+            --light-blue: #3b82f6;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --bg-light: #f9fafb;
             --bg-white: #ffffff;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
-            --ad-green: #10b981;
-            --ad-blue: #3b82f6;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-xl: 0 10px 15px rgba(0,0,0,0.1);
+            --ad-green: #059669;
+            --ad-blue: #0891b2;
         }
 
         * {
@@ -31,34 +31,42 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: #ffffff;
             min-height: 100vh;
             color: var(--text-primary);
-            overflow-x: hidden;
-            width: 100%;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         /* Full Screen Container */
         .full-screen-container {
-            width: 100%;
+            width: 100vw;
             min-height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        /* Floating Left Ad */
+        /* Floating Left Ad - BIGGER */
         .floating-left-ad {
             position: fixed;
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 300px;
+            width: 240px;
+            height: 700px;
             z-index: 1000;
             background: var(--bg-white);
-            border-radius: 0 16px 16px 0;
+            border-radius: 0 12px 12px 0;
             box-shadow: var(--shadow-xl);
             overflow: hidden;
         }
@@ -66,7 +74,7 @@
         .floating-left-ad-header {
             background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
             color: white;
-            padding: 10px 15px;
+            padding: 8px 15px;
             font-size: 12px;
             font-weight: 600;
             display: flex;
@@ -75,26 +83,27 @@
         }
 
         .floating-left-ad-content {
-            padding: 20px 15px;
+            padding: 25px 20px;
             text-align: center;
-            min-height: 600px;
+            height: calc(100% - 40px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            background: var(--bg-light);
         }
 
-        /* Floating Right Ad */
+        /* Floating Right Ad - BIGGER */
         .floating-right-ad {
             position: fixed;
             right: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 300px;
+            width: 240px;
+            height: 700px;
             z-index: 1000;
             background: var(--bg-white);
-            border-radius: 16px 0 0 16px;
+            border-radius: 12px 0 0 12px;
             box-shadow: var(--shadow-xl);
             overflow: hidden;
         }
@@ -102,7 +111,7 @@
         .floating-right-ad-header {
             background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
             color: white;
-            padding: 10px 15px;
+            padding: 8px 15px;
             font-size: 12px;
             font-weight: 600;
             display: flex;
@@ -111,22 +120,24 @@
         }
 
         .floating-right-ad-content {
-            padding: 20px 15px;
+            padding: 25px 20px;
             text-align: center;
-            min-height: 600px;
+            height: calc(100% - 40px);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            background: var(--bg-light);
         }
 
-        /* Main Content Area */
+        /* Main Content Area - Adjusted for bigger ads */
         .main-content-wrapper {
             flex: 1;
-            margin: 0 320px;
-            padding: 0 30px;
-            width: calc(100% - 640px);
+            margin: 0 260px;
+            padding: 0 40px;
+            width: calc(100vw - 520px);
+            min-width: 1200px;
+            max-width: 1600px;
         }
 
         /* Top Banner Ad */
@@ -134,9 +145,9 @@
             background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
             color: white;
             text-align: center;
-            padding: 12px 0;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 8px 0;
+            font-size: 13px;
+            font-weight: 500;
             position: relative;
             overflow: hidden;
         }
@@ -148,8 +159,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: shimmer 3s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: shimmer 4s infinite;
         }
 
         @keyframes shimmer {
@@ -159,28 +170,26 @@
 
         .top-banner-ad .ad-label {
             background: rgba(255, 255, 255, 0.2);
-            padding: 3px 10px;
-            border-radius: 4px;
-            margin-right: 10px;
-            font-size: 13px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            margin-right: 8px;
+            font-size: 11px;
         }
 
-        /* Header Styles */
+        /* Header Styles - More Subtle */
         .header-wrapper {
             background: var(--bg-white);
-            box-shadow: var(--shadow-md);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 999;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
         }
 
         .header-top {
             background: var(--primary-dark);
             color: white;
-            padding: 10px 0;
-            font-size: 0.9rem;
+            padding: 6px 0;
+            font-size: 12px;
             overflow: hidden;
             position: relative;
         }
@@ -193,7 +202,7 @@
 
         .market-ticker {
             display: flex;
-            animation: ticker 30s linear infinite;
+            animation: ticker 35s linear infinite;
             white-space: nowrap;
         }
 
@@ -205,26 +214,27 @@
         .ticker-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 0 40px;
+            gap: 8px;
+            padding: 0 30px;
             white-space: nowrap;
-            font-size: 0.95rem;
+            font-size: 12px;
         }
 
         .ticker-item i {
             color: var(--light-blue);
+            font-size: 10px;
         }
 
         .ticker-change.positive {
-            color: #10b981;
+            color: #059669;
         }
 
         .ticker-change.negative {
-            color: #ef4444;
+            color: #dc2626;
         }
 
         .header-main {
-            padding: 25px 0;
+            padding: 15px 0;
         }
 
         .logo-section {
@@ -235,39 +245,20 @@
 
         .logo {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
             text-decoration: none;
             color: var(--primary-dark);
         }
 
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-        }
-
         .logo-text {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
+            color: var(--primary-blue);
         }
 
         .logo-tagline {
-            font-size: 16px;
+            font-size: 12px;
             color: var(--text-secondary);
             margin-top: 2px;
         }
@@ -275,28 +266,28 @@
         .header-date {
             text-align: right;
             color: var(--text-secondary);
-            font-size: 16px;
+            font-size: 13px;
         }
 
         .live-indicator {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            background: #ef4444;
+            gap: 4px;
+            background: #dc2626;
             color: white;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-top: 8px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-top: 6px;
         }
 
         .live-dot {
-            width: 8px;
-            height: 8px;
+            width: 6px;
+            height: 6px;
             background: white;
             border-radius: 50%;
-            animation: blink 1.5s infinite;
+            animation: blink 2s infinite;
         }
 
         @keyframes blink {
@@ -304,7 +295,7 @@
             50% { opacity: 0.3; }
         }
 
-        /* Navigation Tabs */
+        /* Navigation Tabs - More Subtle */
         .nav-wrapper {
             background: var(--bg-white);
             border-top: 1px solid var(--border-color);
@@ -328,13 +319,13 @@
         .nav-tabs-custom .nav-link {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 20px 40px;
+            gap: 6px;
+            padding: 12px 24px;
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 16px;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
             border: none;
             background: transparent;
             position: relative;
@@ -342,7 +333,7 @@
 
         .nav-tabs-custom .nav-link:hover {
             color: var(--primary-blue);
-            background: rgba(59, 130, 246, 0.05);
+            background: rgba(37, 99, 235, 0.05);
         }
 
         .nav-tabs-custom .nav-link.active {
@@ -356,54 +347,54 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
-            border-radius: 3px 3px 0 0;
+            height: 2px;
+            background: var(--primary-blue);
         }
 
-        /* Featured Article */
+        /* Featured Article - More News-like */
         .featured-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 30px;
         }
 
         .featured-article {
             background: var(--bg-white);
-            border-radius: 20px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 500px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            grid-template-columns: 1.2fr 1fr;
+            min-height: 380px;
+            transition: box-shadow 0.2s ease;
             position: relative;
             width: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .featured-article:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
         }
 
         .featured-badge {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: #ef4444;
+            top: 15px;
+            left: 15px;
+            background: #dc2626;
             color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             z-index: 2;
-            animation: pulse 2s infinite;
         }
 
         .featured-image {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            background: var(--bg-light);
         }
 
         .featured-image img {
@@ -417,11 +408,11 @@
         }
 
         .featured-article:hover .featured-image img {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .featured-content {
-            padding: 60px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -430,32 +421,31 @@
 
         .featured-category {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            background: var(--primary-blue);
             color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 25px;
-            width: fit-content;
+            margin-bottom: 15px;
         }
 
         .featured-title {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            line-height: 1.2;
-            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 12px;
             text-align: left;
         }
 
         .featured-excerpt {
-            font-size: 20px;
+            font-size: 15px;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.5;
+            margin-bottom: 20px;
             text-align: left;
         }
 
@@ -463,7 +453,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 25px;
+            padding-top: 15px;
             border-top: 1px solid var(--border-color);
             margin-top: auto;
         }
@@ -471,20 +461,20 @@
         .author-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            background: var(--primary-blue);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 600;
-            font-size: 18px;
+            font-weight: 500;
+            font-size: 12px;
         }
 
         .author-details {
@@ -494,99 +484,103 @@
         }
 
         .author-name {
-            font-weight: 600;
+            font-weight: 500;
             color: var(--text-primary);
-            font-size: 16px;
+            font-size: 13px;
         }
 
         .article-date {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .read-more-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             color: var(--primary-blue);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: gap 0.3s ease;
+            font-weight: 500;
+            font-size: 13px;
+            transition: gap 0.2s ease;
         }
 
         .read-more-btn:hover {
-            gap: 15px;
+            gap: 8px;
             color: var(--accent-blue);
         }
 
-        /* Articles Grid */
+        /* Articles Grid - More Compact */
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .section-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary-dark);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 8px;
         }
 
         .section-title i {
-            color: var(--accent-blue);
+            color: var(--primary-blue);
+            font-size: 16px;
         }
 
         .view-all-link {
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 500;
-            font-size: 16px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: gap 0.3s ease;
+            gap: 4px;
+            transition: gap 0.2s ease;
         }
 
         .view-all-link:hover {
-            gap: 12px;
+            gap: 6px;
         }
 
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 35px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
         .article-card {
             background: var(--bg-white);
-            border-radius: 16px;
+            border-radius: 6px;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
             position: relative;
             height: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
         }
 
         .article-image {
             position: relative;
-            height: 220px;
+            height: 160px;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            background: var(--bg-light);
         }
 
         .article-image img {
@@ -602,21 +596,21 @@
 
         .article-category-badge {
             position: absolute;
-            top: 15px;
-            left: 15px;
+            top: 10px;
+            left: 10px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             color: var(--primary-blue);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .article-content {
-            padding: 30px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -624,11 +618,11 @@
         }
 
         .article-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary-dark);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
             line-height: 1.3;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -637,12 +631,12 @@
         }
 
         .article-excerpt {
-            font-size: 16px;
+            font-size: 13px;
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.4;
+            margin-bottom: 12px;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex-grow: 1;
@@ -653,36 +647,38 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
+            padding-top: 10px;
             border-top: 1px solid var(--border-color);
         }
 
         .article-author {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 12px;
             color: var(--text-secondary);
         }
 
         .article-author i {
-            color: var(--accent-blue);
+            color: var(--primary-blue);
+            font-size: 10px;
         }
 
         .article-time {
-            font-size: 14px;
+            font-size: 12px;
             color: var(--text-secondary);
         }
 
-        /* Breaking News Ticker */
+        /* Breaking News Ticker - More Subtle */
         .breaking-news {
-            background: #ef4444;
-            color: white;
-            padding: 12px 0;
-            margin-bottom: 40px;
-            border-radius: 8px;
+            background: #f3f4f6;
+            color: var(--text-primary);
+            padding: 8px 0;
+            margin-bottom: 25px;
+            border-radius: 4px;
             overflow: hidden;
             position: relative;
+            border-left: 3px solid #dc2626;
         }
 
         .breaking-news-label {
@@ -690,25 +686,26 @@
             left: 0;
             top: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
+            background: #dc2626;
+            color: white;
             display: flex;
             align-items: center;
-            padding: 0 20px;
-            font-weight: 600;
+            padding: 0 12px;
+            font-weight: 500;
             z-index: 2;
-            font-size: 16px;
+            font-size: 12px;
         }
 
         .breaking-news-label i {
-            margin-right: 10px;
-            animation: blink 1.5s infinite;
+            margin-right: 6px;
+            font-size: 10px;
         }
 
         .breaking-news-content {
-            padding-left: 150px;
+            padding-left: 80px;
             display: flex;
-            animation: breakingNews 20s linear infinite;
-            font-size: 16px;
+            animation: breakingNews 25s linear infinite;
+            font-size: 13px;
         }
 
         @keyframes breakingNews {
@@ -718,63 +715,43 @@
 
         .breaking-news-item {
             white-space: nowrap;
-            padding-right: 60px;
+            padding-right: 50px;
         }
 
         /* In-Article Ad */
         .in-article-ad {
             background: var(--bg-white);
-            border-radius: 12px;
+            border-radius: 6px;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            margin: 40px 0;
+            box-shadow: var(--shadow-sm);
+            margin: 30px 0;
             width: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .in-article-ad-header {
             background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
             color: white;
-            padding: 8px 15px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 500;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .in-article-ad-content {
-            padding: 20px;
+            padding: 15px;
             text-align: center;
-            min-height: 280px;
+            min-height: 200px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            background: var(--bg-light);
         }
 
-        /* Ad Placeholder Text */
-        .ad-placeholder-text {
-            color: var(--text-secondary);
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            padding: 20px 10px;
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.5);
-            width: 100%;
-            margin: 10px 0;
-        }
-
-        .ad-placeholder-text i {
-            font-size: 30px;
-            color: var(--accent-blue);
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        /* Ad Banner Content */
+        /* Ad Banner Content - More Subtle */
         .ad-banner-content {
             width: 100%;
             height: 100%;
@@ -782,99 +759,74 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            border-radius: 8px;
+            padding: 15px;
+            background: var(--bg-white);
+            border-radius: 4px;
             position: relative;
-            overflow: hidden;
-        }
-
-        .ad-banner-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .ad-banner-icon {
-            font-size: 40px;
+            font-size: 24px;
             color: var(--primary-blue);
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 8px;
         }
 
         .ad-banner-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
         }
 
         .ad-banner-text {
-            font-size: 16px;
+            font-size: 12px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
+            margin-bottom: 12px;
         }
 
         .ad-banner-cta {
             display: inline-block;
-            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            background: var(--primary-blue);
             color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 500;
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
+            font-size: 12px;
+            transition: all 0.2s ease;
         }
 
         .ad-banner-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            background: var(--accent-blue);
         }
 
-        /* Footer */
+        /* Footer - More Professional */
         footer {
             background: var(--primary-dark);
             color: white;
-            padding: 50px 0 25px;
-            margin-top: 80px;
+            padding: 40px 0 20px;
+            margin-top: 60px;
             width: 100%;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 40px;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 25px;
         }
 
         .footer-column h4 {
-            font-size: 18px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--light-blue);
+            margin-bottom: 12px;
+            color: white;
         }
 
         .footer-column ul {
@@ -883,76 +835,83 @@
         }
 
         .footer-column ul li {
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .footer-column ul li a {
-            color: #94a3b8;
+            color: #9ca3af;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease;
+            font-size: 13px;
+            transition: color 0.2s ease;
         }
 
         .footer-column ul li a:hover {
-            color: var(--light-blue);
+            color: white;
         }
 
         .footer-bottom {
-            padding-top: 20px;
-            border-top: 1px solid #334155;
+            padding-top: 15px;
+            border-top: 1px solid #374151;
             text-align: center;
-            font-size: 14px;
-            color: #64748b;
+            font-size: 12px;
+            color: #9ca3af;
         }
 
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 12px;
             justify-content: flex-start;
         }
 
         .social-links a {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 16px;
+            transition: all 0.2s ease;
+            font-size: 14px;
         }
 
         .social-links a:hover {
-            background: var(--accent-blue);
-            transform: translateY(-3px);
+            background: var(--primary-blue);
         }
 
         /* Responsive Design */
+        @media (max-width: 1600px) {
+            .main-content-wrapper {
+                max-width: 1400px;
+            }
+        }
+
         @media (max-width: 1400px) {
             .main-content-wrapper {
-                margin: 0 310px;
-                width: calc(100% - 620px);
+                margin: 0 250px;
+                width: calc(100vw - 500px);
+                min-width: 1000px;
             }
             
             .floating-left-ad,
             .floating-right-ad {
-                width: 280px;
+                width: 220px;
             }
         }
 
         @media (max-width: 1200px) {
             .main-content-wrapper {
-                margin: 0 300px;
-                width: calc(100% - 600px);
+                margin: 0 240px;
+                width: calc(100vw - 480px);
+                min-width: 900px;
             }
             
             .floating-left-ad,
             .floating-right-ad {
-                width: 260px;
+                width: 200px;
             }
         }
 
@@ -966,6 +925,7 @@
                 margin: 0;
                 width: 100%;
                 padding: 0 20px;
+                min-width: auto;
             }
         }
 
@@ -975,11 +935,11 @@
             }
 
             .featured-content {
-                padding: 30px 20px;
+                padding: 20px;
             }
 
             .featured-title {
-                font-size: 28px;
+                font-size: 20px;
             }
 
             .articles-grid {
@@ -987,15 +947,15 @@
             }
 
             .nav-tabs-custom .nav-link {
-                padding: 15px 20px;
-                font-size: 14px;
+                padding: 10px 15px;
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
     <div class="full-screen-container">
-        <!-- Floating Left Ad -->
+        <!-- Floating Left Ad - BIGGER -->
         <div class="floating-left-ad">
             <div class="floating-left-ad-header">
                 <span>ADVERTISEMENT</span>
@@ -1003,15 +963,15 @@
             </div>
             <div class="floating-left-ad-content">
                 <div class="ad-banner-content">
-                    <i class="fas fa-chart-line ad-banner-icon"></i>
-                    <h3 class="ad-banner-title">Premium Analytics</h3>
-                    <p class="ad-banner-text">Get real-time market insights and professional trading tools</p>
-                    <a href="#" class="ad-banner-cta">Start Free Trial</a>
+                    <i class="fas fa-chart-line ad-banner-icon" style="font-size: 36px; margin-bottom: 15px;"></i>
+                    <h3 class="ad-banner-title" style="font-size: 18px; margin-bottom: 8px;">Premium Analytics</h3>
+                    <p class="ad-banner-text" style="font-size: 14px; margin-bottom: 15px;">Real-time market insights and professional trading tools</p>
+                    <a href="#" class="ad-banner-cta" style="padding: 8px 16px; font-size: 14px;">Start Free Trial</a>
                 </div>
             </div>
         </div>
 
-        <!-- Floating Right Ad -->
+        <!-- Floating Right Ad - BIGGER -->
         <div class="floating-right-ad">
             <div class="floating-right-ad-header">
                 <span>ADVERTISEMENT</span>
@@ -1019,10 +979,10 @@
             </div>
             <div class="floating-right-ad-content">
                 <div class="ad-banner-content">
-                    <i class="fas fa-wallet ad-banner-icon"></i>
-                    <h3 class="ad-banner-title">Smart Investing</h3>
-                    <p class="ad-banner-text">AI-powered portfolio management with 24/7 monitoring</p>
-                    <a href="#" class="ad-banner-cta">Learn More</a>
+                    <i class="fas fa-wallet ad-banner-icon" style="font-size: 36px; margin-bottom: 15px;"></i>
+                    <h3 class="ad-banner-title" style="font-size: 18px; margin-bottom: 8px;">Smart Investing</h3>
+                    <p class="ad-banner-text" style="font-size: 14px; margin-bottom: 15px;">AI-powered portfolio management with 24/7 monitoring</p>
+                    <a href="#" class="ad-banner-cta" style="padding: 8px 16px; font-size: 14px;">Learn More</a>
                 </div>
             </div>
         </div>
@@ -1048,9 +1008,6 @@
                     <div class="container">
                         <div class="logo-section">
                             <a href="#" class="logo">
-                                <div class="logo-icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
                                 <div>
                                     <div class="logo-text">FinaNews</div>
                                     <div class="logo-tagline">Your Trusted Financial Source</div>
@@ -1120,7 +1077,7 @@
                             <div class="featured-content">
                                 <span class="featured-category">Featured</span>
                                 <h1 class="featured-title">Global Tech Giants Report Record-Breaking Quarterly Earnings</h1>
-                                <p class="featured-excerpt">Leading technology companies surpassed analyst expectations with unprecedented growth in cloud services and artificial intelligence sectors, signaling strong momentum in the digital transformation era.</p>
+                                <p class="featured-excerpt">Leading technology companies surpassed analyst expectations with unprecedented growth in cloud services and artificial intelligence sectors.</p>
                                 <div class="featured-meta">
                                     <div class="author-info">
                                         <div class="author-avatar">SJ</div>
@@ -1145,10 +1102,10 @@
                         </div>
                         <div class="in-article-ad-content">
                             <div class="ad-banner-content">
-                                <i class="fas fa-shield-alt ad-banner-icon"></i>
-                                <h3 class="ad-banner-title">Secure Your Wealth</h3>
-                                <p class="ad-banner-text">Protect your assets with our comprehensive insurance solutions</p>
-                                <a href="#" class="ad-banner-cta">Get Quote</a>
+                                <i class="fas fa-shield-alt ad-banner-icon" style="font-size: 32px; margin-bottom: 12px;"></i>
+                                <h3 class="ad-banner-title" style="font-size: 16px; margin-bottom: 6px;">Secure Your Wealth</h3>
+                                <p class="ad-banner-text" style="font-size: 13px; margin-bottom: 12px;">Comprehensive insurance solutions for your assets</p>
+                                <a href="#" class="ad-banner-cta" style="padding: 7px 14px; font-size: 13px;">Get Quote</a>
                             </div>
                         </div>
                     </div>
@@ -1179,7 +1136,7 @@
                             <div class="featured-content">
                                 <span class="featured-category">Featured</span>
                                 <h1 class="featured-title">Federal Reserve Signals Potential Rate Cuts in 2024</h1>
-                                <p class="featured-excerpt">The Federal Reserve hinted at possible interest rate reductions next year as inflation shows signs of cooling, providing relief to markets and consumers alike.</p>
+                                <p class="featured-excerpt">The Federal Reserve hinted at possible interest rate reductions next year as inflation shows signs of cooling.</p>
                                 <div class="featured-meta">
                                     <div class="author-info">
                                         <div class="author-avatar">RW</div>
@@ -1204,10 +1161,10 @@
                         </div>
                         <div class="in-article-ad-content">
                             <div class="ad-banner-content">
-                                <i class="fas fa-home ad-banner-icon"></i>
-                                <h3 class="ad-banner-title">Mortgage Rates at 20-Year Low</h3>
-                                <p class="ad-banner-text">Refinance your home with our competitive rates and flexible terms</p>
-                                <a href="#" class="ad-banner-cta">Apply Now</a>
+                                <i class="fas fa-home ad-banner-icon" style="font-size: 32px; margin-bottom: 12px;"></i>
+                                <h3 class="ad-banner-title" style="font-size: 16px; margin-bottom: 6px;">Mortgage Rates Low</h3>
+                                <p class="ad-banner-text" style="font-size: 13px; margin-bottom: 12px;">Competitive rates and flexible terms available</p>
+                                <a href="#" class="ad-banner-cta" style="padding: 7px 14px; font-size: 13px;">Apply Now</a>
                             </div>
                         </div>
                     </div>
@@ -1237,7 +1194,7 @@
                             <div class="featured-content">
                                 <span class="featured-category">Featured</span>
                                 <h1 class="featured-title">Stock Markets Reach All-Time Highs Amid Tech Rally</h1>
-                                <p class="featured-excerpt">Major indices closed at record levels as technology stocks led gains, with investors showing renewed confidence in economic recovery and corporate earnings.</p>
+                                <p class="featured-excerpt">Major indices closed at record levels as technology stocks led gains with renewed investor confidence.</p>
                                 <div class="featured-meta">
                                     <div class="author-info">
                                         <div class="author-avatar">ED</div>
@@ -1262,10 +1219,10 @@
                         </div>
                         <div class="in-article-ad-content">
                             <div class="ad-banner-content">
-                                <i class="fas fa-coins ad-banner-icon"></i>
-                                <h3 class="ad-banner-title">Crypto Trading Platform</h3>
-                                <p class="ad-banner-text">Trade Bitcoin, Ethereum and 100+ altcoins with low fees</p>
-                                <a href="#" class="ad-banner-cta">Start Trading</a>
+                                <i class="fas fa-coins ad-banner-icon" style="font-size: 32px; margin-bottom: 12px;"></i>
+                                <h3 class="ad-banner-title" style="font-size: 16px; margin-bottom: 6px;">Crypto Trading</h3>
+                                <p class="ad-banner-text" style="font-size: 13px; margin-bottom: 12px;">Trade 100+ cryptocurrencies with low fees</p>
+                                <a href="#" class="ad-banner-cta" style="padding: 7px 14px; font-size: 13px;">Start Trading</a>
                             </div>
                         </div>
                     </div>
@@ -1285,45 +1242,45 @@
 
                 <!-- About Tab -->
                 <div class="tab-pane fade" id="about">
-                    <div class="about-section" style="background: var(--bg-white); border-radius: 20px; padding: 50px; box-shadow: var(--shadow-lg); text-align: left;">
-                        <div class="about-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 36px; margin: 0 auto 30px;">
+                    <div class="about-section" style="background: var(--bg-white); border-radius: 8px; padding: 40px; box-shadow: var(--shadow-md); text-align: left; border: 1px solid var(--border-color);">
+                        <div class="about-icon" style="width: 60px; height: 60px; background: var(--primary-blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 auto 20px;">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h2 class="about-title" style="font-size: 36px; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; text-align: center;">About FinaNews</h2>
-                        <p class="about-description" style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 900px; margin: 0 auto 40px; text-align: left;">
+                        <h2 class="about-title" style="font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 15px; text-align: center;">About FinaNews</h2>
+                        <p class="about-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; max-width: 800px; margin: 0 auto 30px; text-align: left;">
                             FinaNews is your premier destination for comprehensive financial news, market analysis, and economic insights. 
                             Our mission is to deliver accurate, timely, and relevant financial information to help you make informed decisions 
                             in today's dynamic economic landscape.
                         </p>
                         
-                        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
-                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
-                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+                            <div class="feature-card" style="padding: 20px; border-radius: 6px; background: var(--bg-light); text-align: left;">
+                                <div class="feature-icon" style="width: 40px; height: 40px; background: var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; margin: 0 0 12px 0;">
                                     <i class="fas fa-newspaper"></i>
                                 </div>
-                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Breaking News</h3>
-                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Real-time coverage of major financial events and market-moving news as it happens</p>
+                                <h3 class="feature-title" style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Breaking News</h3>
+                                <p class="feature-description" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Real-time coverage of major financial events and market-moving news</p>
                             </div>
-                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
-                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                            <div class="feature-card" style="padding: 20px; border-radius: 6px; background: var(--bg-light); text-align: left;">
+                                <div class="feature-icon" style="width: 40px; height: 40px; background: var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; margin: 0 0 12px 0;">
                                     <i class="fas fa-chart-pie"></i>
                                 </div>
-                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Expert Analysis</h3>
-                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">In-depth analysis and insights from leading financial experts and industry veterans</p>
+                                <h3 class="feature-title" style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Expert Analysis</h3>
+                                <p class="feature-description" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">In-depth analysis and insights from leading financial experts</p>
                             </div>
-                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
-                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                            <div class="feature-card" style="padding: 20px; border-radius: 6px; background: var(--bg-light); text-align: left;">
+                                <div class="feature-icon" style="width: 40px; height: 40px; background: var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; margin: 0 0 12px 0;">
                                     <i class="fas fa-globe"></i>
                                 </div>
-                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Global Coverage</h3>
-                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Comprehensive reporting on international markets and economic developments</p>
+                                <h3 class="feature-title" style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Global Coverage</h3>
+                                <p class="feature-description" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Comprehensive reporting on international markets and developments</p>
                             </div>
-                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
-                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                            <div class="feature-card" style="padding: 20px; border-radius: 6px; background: var(--bg-light); text-align: left;">
+                                <div class="feature-icon" style="width: 40px; height: 40px; background: var(--primary-blue); border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; margin: 0 0 12px 0;">
                                     <i class="fas fa-users"></i>
                                 </div>
-                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Trusted Source</h3>
-                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Reliable, unbiased financial information you can count on for critical decisions</p>
+                                <h3 class="feature-title" style="font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Trusted Source</h3>
+                                <p class="feature-description" style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">Reliable, unbiased financial information for critical decisions</p>
                             </div>
                         </div>
                     </div>
@@ -1336,7 +1293,7 @@
                     <div class="footer-grid">
                         <div class="footer-column">
                             <h4>About FinaNews</h4>
-                            <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">
+                            <p style="color: #9ca3af; font-size: 12px; line-height: 1.5;">
                                 Your trusted source for financial news, market analysis, and economic insights. 
                                 Delivering quality journalism since 2020.
                             </p>
@@ -1390,8 +1347,8 @@
             business: [
                 {
                     id: 1,
-                    title: "Innovation Drive: Startups Raise $50B in Q3 Funding",
-                    excerpt: "Venture capital investments surge as technology startups attract record funding, with AI and clean energy sectors leading the charge.",
+                    title: "Startups Raise $50B in Q3 Funding",
+                    excerpt: "Venture capital investments surge as technology startups attract record funding, with AI and clean energy sectors leading.",
                     image: "https://picsum.photos/seed/business2/400/200.jpg",
                     link: "https://example.com/startup-funding",
                     author: "Michael Chen",
@@ -1400,8 +1357,8 @@
                 },
                 {
                     id: 2,
-                    title: "Global Supply Chain Recovery Exceeds Expectations",
-                    excerpt: "Recent data shows significant improvements in logistics and shipping efficiency, reducing costs and delivery times worldwide.",
+                    title: "Supply Chain Recovery Exceeds Expectations",
+                    excerpt: "Recent data shows significant improvements in logistics and shipping efficiency, reducing costs worldwide.",
                     image: "https://picsum.photos/seed/business3/400/200.jpg",
                     link: "https://example.com/supply-chain",
                     author: "Lisa Anderson",
@@ -1410,8 +1367,8 @@
                 },
                 {
                     id: 3,
-                    title: "Corporate Earnings Season Beats Analyst Predictions",
-                    excerpt: "Major corporations report stronger-than-expected quarterly results, driven by consumer spending and operational efficiency.",
+                    title: "Corporate Earnings Beat Analyst Predictions",
+                    excerpt: "Major corporations report stronger-than-expected quarterly results, driven by consumer spending.",
                     image: "https://picsum.photos/seed/business4/400/200.jpg",
                     link: "https://example.com/earnings",
                     author: "David Kim",
@@ -1421,7 +1378,7 @@
                 {
                     id: 4,
                     title: "Merger Activity Surges to Pre-Pandemic Levels",
-                    excerpt: "M&A transactions reach highest levels in three years as companies pursue strategic acquisitions for growth.",
+                    excerpt: "M&A transactions reach highest levels in three years as companies pursue strategic acquisitions.",
                     image: "https://picsum.photos/seed/business5/400/200.jpg",
                     link: "https://example.com/mergers",
                     author: "Jennifer Wu",
@@ -1430,8 +1387,8 @@
                 },
                 {
                     id: 13,
-                    title: "Retail Giants Embrace AI for Personalized Shopping",
-                    excerpt: "Major retailers implement artificial intelligence solutions to enhance customer experience and optimize inventory management.",
+                    title: "Retail Giants Embrace AI for Shopping",
+                    excerpt: "Major retailers implement artificial intelligence solutions to enhance customer experience.",
                     image: "https://picsum.photos/seed/business6/400/200.jpg",
                     link: "https://example.com/retail-ai",
                     author: "Robert Taylor",
@@ -1440,8 +1397,8 @@
                 },
                 {
                     id: 14,
-                    title: "Banking Sector Announces Digital Transformation Initiative",
-                    excerpt: "Leading financial institutions commit to $100 billion investment in digital infrastructure over the next five years.",
+                    title: "Banking Sector Digital Transformation Initiative",
+                    excerpt: "Leading financial institutions commit to $100 billion investment in digital infrastructure.",
                     image: "https://picsum.photos/seed/business7/400/200.jpg",
                     link: "https://example.com/banking-digital",
                     author: "Amanda Foster",
@@ -1451,7 +1408,7 @@
                 {
                     id: 15,
                     title: "Automakers Accelerate EV Production Plans",
-                    excerpt: "Major car manufacturers announce timeline acceleration for electric vehicle models in response to growing demand.",
+                    excerpt: "Major car manufacturers announce timeline acceleration for electric vehicle models.",
                     image: "https://picsum.photos/seed/business8/400/200.jpg",
                     link: "https://example.com/automotive-ev",
                     author: "Carlos Rodriguez",
@@ -1460,8 +1417,8 @@
                 },
                 {
                     id: 16,
-                    title: "Pharmaceutical Companies Report Breakthrough in Cancer Treatment",
-                    excerpt: "Clinical trials show promising results for new immunotherapy approach with significantly fewer side effects.",
+                    title: "Pharma Breakthrough in Cancer Treatment",
+                    excerpt: "Clinical trials show promising results for new immunotherapy approach with fewer side effects.",
                     image: "https://picsum.photos/seed/business9/400/200.jpg",
                     link: "https://example.com/pharma-breakthrough",
                     author: "Dr. Elizabeth Park",
@@ -1473,7 +1430,7 @@
                 {
                     id: 5,
                     title: "Inflation Rate Drops to 2.9% in October",
-                    excerpt: "Consumer price index shows continued moderation in inflation, bringing it closer to Federal Reserve's target range.",
+                    excerpt: "Consumer price index shows continued moderation in inflation, bringing it closer to Federal Reserve's target.",
                     image: "https://picsum.photos/seed/economic2/400/200.jpg",
                     link: "https://example.com/inflation",
                     author: "Thomas Brown",
@@ -1483,7 +1440,7 @@
                 {
                     id: 6,
                     title: "Unemployment Claims Fall to 8-Month Low",
-                    excerpt: "Labor market shows resilience as jobless claims decline, indicating steady economic growth and employment stability.",
+                    excerpt: "Labor market shows resilience as jobless claims decline, indicating steady economic growth.",
                     image: "https://picsum.photos/seed/economic3/400/200.jpg",
                     link: "https://example.com/employment",
                     author: "Maria Garcia",
@@ -1493,7 +1450,7 @@
                 {
                     id: 7,
                     title: "GDP Growth Revised Upward to 3.2%",
-                    excerpt: "Economy expands faster than initially estimated, driven by strong consumer spending and business investment.",
+                    excerpt: "Economy expands faster than initially estimated, driven by strong consumer spending.",
                     image: "https://picsum.photos/seed/economic4/400/200.jpg",
                     link: "https://example.com/gdp",
                     author: "James Wilson",
@@ -1503,7 +1460,7 @@
                 {
                     id: 8,
                     title: "Manufacturing Index Shows Strong Expansion",
-                    excerpt: "Factory activity accelerates as new orders and production levels rise, signaling robust industrial sector performance.",
+                    excerpt: "Factory activity accelerates as new orders and production levels rise.",
                     image: "https://picsum.photos/seed/economic5/400/200.jpg",
                     link: "https://example.com/manufacturing",
                     author: "Patricia Lee",
@@ -1512,8 +1469,8 @@
                 },
                 {
                     id: 17,
-                    title: "Consumer Confidence Reaches Highest Level in Two Years",
-                    excerpt: "Survey shows Americans increasingly optimistic about job prospects and economic conditions despite global uncertainties.",
+                    title: "Consumer Confidence at Two-Year High",
+                    excerpt: "Survey shows Americans increasingly optimistic about job prospects and economic conditions.",
                     image: "https://picsum.photos/seed/economic6/400/200.jpg",
                     link: "https://example.com/consumer-confidence",
                     author: "Daniel Martinez",
@@ -1522,8 +1479,8 @@
                 },
                 {
                     id: 18,
-                    title: "Housing Market Shows Signs of Stabilization",
-                    excerpt: "Home prices plateau while inventory increases, creating more balanced conditions for buyers and sellers.",
+                    title: "Housing Market Shows Stabilization",
+                    excerpt: "Home prices plateau while inventory increases, creating more balanced conditions.",
                     image: "https://picsum.photos/seed/economic7/400/200.jpg",
                     link: "https://example.com/housing-market",
                     author: "Rachel Green",
@@ -1533,7 +1490,7 @@
                 {
                     id: 19,
                     title: "Trade Deficit Narrows as Exports Surge",
-                    excerpt: "International trade data shows significant improvement in export performance across multiple sectors.",
+                    excerpt: "International trade data shows significant improvement in export performance.",
                     image: "https://picsum.photos/seed/economic8/400/200.jpg",
                     link: "https://example.com/trade-deficit",
                     author: "Steven Adams",
@@ -1542,8 +1499,8 @@
                 },
                 {
                     id: 20,
-                    title: "Central Banks Coordinate on Currency Stabilization",
-                    excerpt: "Major central banks announce joint measures to address excessive volatility in foreign exchange markets.",
+                    title: "Central Banks Coordinate on Currency Stability",
+                    excerpt: "Major central banks announce joint measures to address foreign exchange volatility.",
                     image: "https://picsum.photos/seed/economic9/400/200.jpg",
                     link: "https://example.com/currency-stabilization",
                     author: "Nina Patel",
@@ -1554,8 +1511,8 @@
             market: [
                 {
                     id: 9,
-                    title: "Cryptocurrency Market Cap Surpasses $2 Trillion",
-                    excerpt: "Digital assets rally as Bitcoin and Ethereum lead gains, institutional adoption drives market expansion.",
+                    title: "Crypto Market Cap Surpasses $2 Trillion",
+                    excerpt: "Digital assets rally as Bitcoin and Ethereum lead gains, institutional adoption drives expansion.",
                     image: "https://picsum.photos/seed/market2/400/200.jpg",
                     link: "https://example.com/crypto",
                     author: "Alex Turner",
@@ -1565,7 +1522,7 @@
                 {
                     id: 10,
                     title: "Energy Stocks Surge on Oil Price Rally",
-                    excerpt: "Energy sector outperforms as crude oil prices climb to 3-month highs, boosting producer profits.",
+                    excerpt: "Energy sector outperforms as crude oil prices climb to 3-month highs, boosting profits.",
                     image: "https://picsum.photos/seed/market3/400/200.jpg",
                     link: "https://example.com/energy",
                     author: "Richard Moore",
@@ -1575,7 +1532,7 @@
                 {
                     id: 11,
                     title: "Gold Prices Rise Amid Economic Uncertainty",
-                    excerpt: "Safe-haven demand increases as investors seek protection against market volatility and inflation concerns.",
+                    excerpt: "Safe-haven demand increases as investors seek protection against market volatility.",
                     image: "https://picsum.photos/seed/market4/400/200.jpg",
                     link: "https://example.com/gold",
                     author: "Susan Martinez",
@@ -1585,7 +1542,7 @@
                 {
                     id: 12,
                     title: "Tech Stocks Lead Market Rally",
-                    excerpt: "Nasdaq outperforms as technology giants post strong earnings, driving broader market gains.",
+                    excerpt: "Nasdaq outperforms as technology giants post strong earnings, driving broader gains.",
                     image: "https://picsum.photos/seed/market5/400/200.jpg",
                     link: "https://example.com/tech-stocks",
                     author: "Kevin Zhang",
@@ -1595,7 +1552,7 @@
                 {
                     id: 21,
                     title: "Biotech Stocks Soar on FDA Approval News",
-                    excerpt: "Several biotechnology companies see double-digit gains after receiving regulatory approval for new treatments.",
+                    excerpt: "Several biotechnology companies see double-digit gains after regulatory approvals.",
                     image: "https://picsum.photos/seed/market6/400/200.jpg",
                     link: "https://example.com/biotech-stocks",
                     author: "Dr. Michelle Liu",
@@ -1604,8 +1561,8 @@
                 },
                 {
                     id: 22,
-                    title: "Retail Stocks Rise on Strong Holiday Sales Forecast",
-                    excerpt: "Major retailers see stock price increases as analysts predict robust consumer spending during upcoming holiday season.",
+                    title: "Retail Stocks Rise on Holiday Sales Forecast",
+                    excerpt: "Major retailers see stock price increases as analysts predict robust consumer spending.",
                     image: "https://picsum.photos/seed/market7/400/200.jpg",
                     link: "https://example.com/retail-stocks",
                     author: "Brian Thompson",
@@ -1614,8 +1571,8 @@
                 },
                 {
                     id: 23,
-                    title: "Financial Sector Outperforms on Interest Rate Outlook",
-                    excerpt: "Banking stocks gain as investors anticipate favorable conditions for financial institutions in coming months.",
+                    title: "Financial Sector Outperforms on Rate Outlook",
+                    excerpt: "Banking stocks gain as investors anticipate favorable conditions for institutions.",
                     image: "https://picsum.photos/seed/market8/400/200.jpg",
                     link: "https://example.com/financial-stocks",
                     author: "Sarah Jenkins",
@@ -1624,8 +1581,8 @@
                 },
                 {
                     id: 24,
-                    title: "Emerging Markets Attract Record Investment Flows",
-                    excerpt: "International investors shift capital to developing economies seeking higher returns amid global economic rebalancing.",
+                    title: "Emerging Markets Attract Record Investment",
+                    excerpt: "International investors shift capital to developing economies seeking higher returns.",
                     image: "https://picsum.photos/seed/market9/400/200.jpg",
                     link: "https://example.com/emerging-markets",
                     author: "Ahmed Hassan",
@@ -1724,7 +1681,6 @@
         function updateDateTime() {
             const now = new Date();
             const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             
             document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', dateOptions);
         }
@@ -1788,6 +1744,4 @@
         });
     </script>
 </body>
-
 </html>
-
