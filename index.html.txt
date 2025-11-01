@@ -1,0 +1,1791 @@
+9PXbi7wPuujK6Tx<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinaNews - Premium Financial News</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --primary-blue: #1e40af;
+            --accent-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --shadow-xl: 0 20px 25px rgba(0,0,0,0.1);
+            --ad-green: #10b981;
+            --ad-blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Full Screen Container */
+        .full-screen-container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Floating Left Ad */
+        .floating-left-ad {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            z-index: 1000;
+            background: var(--bg-white);
+            border-radius: 0 16px 16px 0;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .floating-left-ad-header {
+            background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
+            color: white;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .floating-left-ad-content {
+            padding: 20px 15px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        /* Floating Right Ad */
+        .floating-right-ad {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            z-index: 1000;
+            background: var(--bg-white);
+            border-radius: 16px 0 0 16px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .floating-right-ad-header {
+            background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
+            color: white;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .floating-right-ad-content {
+            padding: 20px 15px;
+            text-align: center;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        /* Main Content Area */
+        .main-content-wrapper {
+            flex: 1;
+            margin: 0 320px;
+            padding: 0 30px;
+            width: calc(100% - 640px);
+        }
+
+        /* Top Banner Ad */
+        .top-banner-ad {
+            background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-banner-ad::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .top-banner-ad .ad-label {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 13px;
+        }
+
+        /* Header Styles */
+        .header-wrapper {
+            background: var(--bg-white);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .header-top {
+            background: var(--primary-dark);
+            color: white;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .market-ticker-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .market-ticker {
+            display: flex;
+            animation: ticker 30s linear infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 40px;
+            white-space: nowrap;
+            font-size: 0.95rem;
+        }
+
+        .ticker-item i {
+            color: var(--light-blue);
+        }
+
+        .ticker-change.positive {
+            color: #10b981;
+        }
+
+        .ticker-change.negative {
+            color: #ef4444;
+        }
+
+        .header-main {
+            padding: 25px 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--primary-dark);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .header-date {
+            text-align: right;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #ef4444;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Navigation Tabs */
+        .nav-wrapper {
+            background: var(--bg-white);
+            border-top: 1px solid var(--border-color);
+            padding: 0;
+        }
+
+        .nav-tabs-custom {
+            display: flex;
+            gap: 0;
+            border: none;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            justify-content: center;
+        }
+
+        .nav-tabs-custom .nav-item {
+            position: relative;
+        }
+
+        .nav-tabs-custom .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 40px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: none;
+            background: transparent;
+            position: relative;
+        }
+
+        .nav-tabs-custom .nav-link:hover {
+            color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            color: var(--primary-blue);
+            background: transparent;
+        }
+
+        .nav-tabs-custom .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Featured Article */
+        .featured-section {
+            margin-bottom: 40px;
+        }
+
+        .featured-article {
+            background: var(--bg-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            width: 100%;
+        }
+
+        .featured-article:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ef4444;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+
+        .featured-image {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-article:hover .featured-image img {
+            transform: scale(1.05);
+        }
+
+        .featured-content {
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .featured-category {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            width: fit-content;
+        }
+
+        .featured-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.2;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .featured-excerpt {
+            font-size: 20px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .featured-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+        }
+
+        .author-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 16px;
+        }
+
+        .article-date {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: gap 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            gap: 15px;
+            color: var(--accent-blue);
+        }
+
+        /* Articles Grid */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: var(--accent-blue);
+        }
+
+        .view-all-link {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .view-all-link:hover {
+            gap: 12px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .article-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            height: 100%;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .article-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-category-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: var(--primary-blue);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .article-content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .article-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.3;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .article-excerpt {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .article-author i {
+            color: var(--accent-blue);
+        }
+
+        .article-time {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Breaking News Ticker */
+        .breaking-news {
+            background: #ef4444;
+            color: white;
+            padding: 12px 0;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .breaking-news-label {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: 600;
+            z-index: 2;
+            font-size: 16px;
+        }
+
+        .breaking-news-label i {
+            margin-right: 10px;
+            animation: blink 1.5s infinite;
+        }
+
+        .breaking-news-content {
+            padding-left: 150px;
+            display: flex;
+            animation: breakingNews 20s linear infinite;
+            font-size: 16px;
+        }
+
+        @keyframes breakingNews {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .breaking-news-item {
+            white-space: nowrap;
+            padding-right: 60px;
+        }
+
+        /* In-Article Ad */
+        .in-article-ad {
+            background: var(--bg-white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        .in-article-ad-header {
+            background: linear-gradient(90deg, var(--ad-green), var(--ad-blue));
+            color: white;
+            padding: 8px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .in-article-ad-content {
+            padding: 20px;
+            text-align: center;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        }
+
+        /* Ad Placeholder Text */
+        .ad-placeholder-text {
+            color: var(--text-secondary);
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px 10px;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .ad-placeholder-text i {
+            font-size: 30px;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Ad Banner Content */
+        .ad-banner-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-banner-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .ad-banner-icon {
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-banner-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-banner-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-banner-cta {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-banner-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 50px 0 25px;
+            margin-top: 80px;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--light-blue);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--light-blue);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+            text-align: center;
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: flex-start;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1400px) {
+            .main-content-wrapper {
+                margin: 0 310px;
+                width: calc(100% - 620px);
+            }
+            
+            .floating-left-ad,
+            .floating-right-ad {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .main-content-wrapper {
+                margin: 0 300px;
+                width: calc(100% - 600px);
+            }
+            
+            .floating-left-ad,
+            .floating-right-ad {
+                width: 260px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .floating-left-ad,
+            .floating-right-ad {
+                display: none;
+            }
+            
+            .main-content-wrapper {
+                margin: 0;
+                width: 100%;
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-content {
+                padding: 30px 20px;
+            }
+
+            .featured-title {
+                font-size: 28px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs-custom .nav-link {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="full-screen-container">
+        <!-- Floating Left Ad -->
+        <div class="floating-left-ad">
+            <div class="floating-left-ad-header">
+                <span>ADVERTISEMENT</span>
+                <i class="fas fa-external-link-alt"></i>
+            </div>
+            <div class="floating-left-ad-content">
+                <div class="ad-banner-content">
+                    <i class="fas fa-chart-line ad-banner-icon"></i>
+                    <h3 class="ad-banner-title">Premium Analytics</h3>
+                    <p class="ad-banner-text">Get real-time market insights and professional trading tools</p>
+                    <a href="#" class="ad-banner-cta">Start Free Trial</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Right Ad -->
+        <div class="floating-right-ad">
+            <div class="floating-right-ad-header">
+                <span>ADVERTISEMENT</span>
+                <i class="fas fa-external-link-alt"></i>
+            </div>
+            <div class="floating-right-ad-content">
+                <div class="ad-banner-content">
+                    <i class="fas fa-wallet ad-banner-icon"></i>
+                    <h3 class="ad-banner-title">Smart Investing</h3>
+                    <p class="ad-banner-text">AI-powered portfolio management with 24/7 monitoring</p>
+                    <a href="#" class="ad-banner-cta">Learn More</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content-wrapper">
+            <!-- Top Banner Ad -->
+            <div class="top-banner-ad">
+                <span class="ad-label">ADVERTISEMENT</span>
+                📈 Special Offer: Get Premium Financial Insights - 30% Off Annual Subscription! Limited Time Only.
+            </div>
+
+            <!-- Header -->
+            <header class="header-wrapper">
+                <div class="header-top">
+                    <div class="market-ticker-container">
+                        <div class="market-ticker" id="marketTicker">
+                            <!-- Ticker items will be generated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="header-main">
+                    <div class="container">
+                        <div class="logo-section">
+                            <a href="#" class="logo">
+                                <div class="logo-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div>
+                                    <div class="logo-text">FinaNews</div>
+                                    <div class="logo-tagline">Your Trusted Financial Source</div>
+                                </div>
+                            </a>
+                            <div class="header-date">
+                                <div id="currentDate"></div>
+                                <div class="live-indicator">
+                                    <span class="live-dot"></span>
+                                    LIVE
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation -->
+            <nav class="nav-wrapper">
+                <div class="container">
+                    <ul class="nav-tabs-custom" id="mainTabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#business" data-bs-toggle="tab">
+                                <i class="fas fa-briefcase"></i> Business
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#economic" data-bs-toggle="tab">
+                                <i class="fas fa-coins"></i> Economic
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#market" data-bs-toggle="tab">
+                                <i class="fas fa-chart-bar"></i> Market
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about" data-bs-toggle="tab">
+                                <i class="fas fa-info-circle"></i> About
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Breaking News Ticker -->
+            <div class="breaking-news">
+                <div class="breaking-news-label">
+                    <i class="fas fa-bolt"></i> BREAKING
+                </div>
+                <div class="breaking-news-content" id="breakingNews">
+                    <!-- Breaking news items will be generated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Business Tab -->
+                <div class="tab-pane fade show active" id="business">
+                    <!-- Featured Article -->
+                    <section class="featured-section">
+                        <a href="https://example.com/business-featured" class="featured-article" target="_blank">
+                            <div class="featured-badge">EXCLUSIVE</div>
+                            <div class="featured-image">
+                                <img src="https://picsum.photos/seed/business1/900/450.jpg" alt="Featured Business Article">
+                            </div>
+                            <div class="featured-content">
+                                <span class="featured-category">Featured</span>
+                                <h1 class="featured-title">Global Tech Giants Report Record-Breaking Quarterly Earnings</h1>
+                                <p class="featured-excerpt">Leading technology companies surpassed analyst expectations with unprecedented growth in cloud services and artificial intelligence sectors, signaling strong momentum in the digital transformation era.</p>
+                                <div class="featured-meta">
+                                    <div class="author-info">
+                                        <div class="author-avatar">SJ</div>
+                                        <div class="author-details">
+                                            <span class="author-name">Sarah Johnson</span>
+                                            <span class="article-date">2 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <span class="read-more-btn">
+                                        Read Full Story <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </section>
+
+                    <!-- In-Article Ad -->
+                    <div class="in-article-ad">
+                        <div class="in-article-ad-header">
+                            <span>ADVERTISEMENT</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="in-article-ad-content">
+                            <div class="ad-banner-content">
+                                <i class="fas fa-shield-alt ad-banner-icon"></i>
+                                <h3 class="ad-banner-title">Secure Your Wealth</h3>
+                                <p class="ad-banner-text">Protect your assets with our comprehensive insurance solutions</p>
+                                <a href="#" class="ad-banner-cta">Get Quote</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Business Articles -->
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-newspaper"></i> Latest Business News
+                        </h2>
+                        <a href="#" class="view-all-link">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="articles-grid" id="businessArticles">
+                        <!-- Articles will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Economic Tab -->
+                <div class="tab-pane fade" id="economic">
+                    <!-- Featured Article -->
+                    <section class="featured-section">
+                        <a href="https://example.com/economic-featured" class="featured-article" target="_blank">
+                            <div class="featured-badge">EXCLUSIVE</div>
+                            <div class="featured-image">
+                                <img src="https://picsum.photos/seed/economic1/900/450.jpg" alt="Featured Economic Article">
+                            </div>
+                            <div class="featured-content">
+                                <span class="featured-category">Featured</span>
+                                <h1 class="featured-title">Federal Reserve Signals Potential Rate Cuts in 2024</h1>
+                                <p class="featured-excerpt">The Federal Reserve hinted at possible interest rate reductions next year as inflation shows signs of cooling, providing relief to markets and consumers alike.</p>
+                                <div class="featured-meta">
+                                    <div class="author-info">
+                                        <div class="author-avatar">RW</div>
+                                        <div class="author-details">
+                                            <span class="author-name">Robert Williams</span>
+                                            <span class="article-date">4 hours ago</span>
+                                        </div>
+                                    </div>
+                                    <span class="read-more-btn">
+                                        Read Full Story <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </section>
+
+                    <!-- In-Article Ad -->
+                    <div class="in-article-ad">
+                        <div class="in-article-ad-header">
+                            <span>ADVERTISEMENT</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="in-article-ad-content">
+                            <div class="ad-banner-content">
+                                <i class="fas fa-home ad-banner-icon"></i>
+                                <h3 class="ad-banner-title">Mortgage Rates at 20-Year Low</h3>
+                                <p class="ad-banner-text">Refinance your home with our competitive rates and flexible terms</p>
+                                <a href="#" class="ad-banner-cta">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-line"></i> Economic Analysis
+                        </h2>
+                        <a href="#" class="view-all-link">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="articles-grid" id="economicArticles">
+                        <!-- Articles will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Market Tab -->
+                <div class="tab-pane fade" id="market">
+                    <!-- Featured Article -->
+                    <section class="featured-section">
+                        <a href="https://example.com/market-featured" class="featured-article" target="_blank">
+                            <div class="featured-badge">EXCLUSIVE</div>
+                            <div class="featured-image">
+                                <img src="https://picsum.photos/seed/market1/900/450.jpg" alt="Featured Market Article">
+                            </div>
+                            <div class="featured-content">
+                                <span class="featured-category">Featured</span>
+                                <h1 class="featured-title">Stock Markets Reach All-Time Highs Amid Tech Rally</h1>
+                                <p class="featured-excerpt">Major indices closed at record levels as technology stocks led gains, with investors showing renewed confidence in economic recovery and corporate earnings.</p>
+                                <div class="featured-meta">
+                                    <div class="author-info">
+                                        <div class="author-avatar">ED</div>
+                                        <div class="author-details">
+                                            <span class="author-name">Emily Davis</span>
+                                            <span class="article-date">1 hour ago</span>
+                                        </div>
+                                    </div>
+                                    <span class="read-more-btn">
+                                        Read Full Story <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </section>
+
+                    <!-- In-Article Ad -->
+                    <div class="in-article-ad">
+                        <div class="in-article-ad-header">
+                            <span>ADVERTISEMENT</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </div>
+                        <div class="in-article-ad-content">
+                            <div class="ad-banner-content">
+                                <i class="fas fa-coins ad-banner-icon"></i>
+                                <h3 class="ad-banner-title">Crypto Trading Platform</h3>
+                                <p class="ad-banner-text">Trade Bitcoin, Ethereum and 100+ altcoins with low fees</p>
+                                <a href="#" class="ad-banner-cta">Start Trading</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-chart-bar"></i> Market Updates
+                        </h2>
+                        <a href="#" class="view-all-link">
+                            View All <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="articles-grid" id="marketArticles">
+                        <!-- Articles will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- About Tab -->
+                <div class="tab-pane fade" id="about">
+                    <div class="about-section" style="background: var(--bg-white); border-radius: 20px; padding: 50px; box-shadow: var(--shadow-lg); text-align: left;">
+                        <div class="about-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 36px; margin: 0 auto 30px;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h2 class="about-title" style="font-size: 36px; font-weight: 700; color: var(--primary-dark); margin-bottom: 20px; text-align: center;">About FinaNews</h2>
+                        <p class="about-description" style="font-size: 18px; color: var(--text-secondary); line-height: 1.7; max-width: 900px; margin: 0 auto 40px; text-align: left;">
+                            FinaNews is your premier destination for comprehensive financial news, market analysis, and economic insights. 
+                            Our mission is to deliver accurate, timely, and relevant financial information to help you make informed decisions 
+                            in today's dynamic economic landscape.
+                        </p>
+                        
+                        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px;">
+                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
+                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                                    <i class="fas fa-newspaper"></i>
+                                </div>
+                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Breaking News</h3>
+                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Real-time coverage of major financial events and market-moving news as it happens</p>
+                            </div>
+                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
+                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Expert Analysis</h3>
+                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">In-depth analysis and insights from leading financial experts and industry veterans</p>
+                            </div>
+                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
+                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Global Coverage</h3>
+                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Comprehensive reporting on international markets and economic developments</p>
+                            </div>
+                            <div class="feature-card" style="padding: 30px; border-radius: 16px; background: var(--bg-light); transition: all 0.3s ease; text-align: left;">
+                                <div class="feature-icon" style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin: 0 0 20px 0;">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="feature-title" style="font-size: 18px; font-weight: 600; color: var(--primary-dark); margin-bottom: 10px; text-align: left;">Trusted Source</h3>
+                                <p class="feature-description" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; text-align: left;">Reliable, unbiased financial information you can count on for critical decisions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <div class="footer-content">
+                    <div class="footer-grid">
+                        <div class="footer-column">
+                            <h4>About FinaNews</h4>
+                            <p style="color: #94a3b8; font-size: 14px; line-height: 1.6;">
+                                Your trusted source for financial news, market analysis, and economic insights. 
+                                Delivering quality journalism since 2020.
+                            </p>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#">Business News</a></li>
+                                <li><a href="#">Market Analysis</a></li>
+                                <li><a href="#">Economic Reports</a></li>
+                                <li><a href="#">Investment Guide</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Market Data</a></li>
+                                <li><a href="#">Economic Calendar</a></li>
+                                <li><a href="#">Financial Tools</a></li>
+                                <li><a href="#">Research Reports</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Legal</h4>
+                            <ul>
+                                <li><a href="#">Terms of Service</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Cookie Policy</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p>&copy; 2024 FinaNews. All rights reserved. | Market data provided for informational purposes only.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Article Data
+        const articlesData = {
+            business: [
+                {
+                    id: 1,
+                    title: "Innovation Drive: Startups Raise $50B in Q3 Funding",
+                    excerpt: "Venture capital investments surge as technology startups attract record funding, with AI and clean energy sectors leading the charge.",
+                    image: "https://picsum.photos/seed/business2/400/200.jpg",
+                    link: "https://example.com/startup-funding",
+                    author: "Michael Chen",
+                    date: "3 hours ago",
+                    category: "Venture Capital"
+                },
+                {
+                    id: 2,
+                    title: "Global Supply Chain Recovery Exceeds Expectations",
+                    excerpt: "Recent data shows significant improvements in logistics and shipping efficiency, reducing costs and delivery times worldwide.",
+                    image: "https://picsum.photos/seed/business3/400/200.jpg",
+                    link: "https://example.com/supply-chain",
+                    author: "Lisa Anderson",
+                    date: "5 hours ago",
+                    category: "Logistics"
+                },
+                {
+                    id: 3,
+                    title: "Corporate Earnings Season Beats Analyst Predictions",
+                    excerpt: "Major corporations report stronger-than-expected quarterly results, driven by consumer spending and operational efficiency.",
+                    image: "https://picsum.photos/seed/business4/400/200.jpg",
+                    link: "https://example.com/earnings",
+                    author: "David Kim",
+                    date: "6 hours ago",
+                    category: "Earnings"
+                },
+                {
+                    id: 4,
+                    title: "Merger Activity Surges to Pre-Pandemic Levels",
+                    excerpt: "M&A transactions reach highest levels in three years as companies pursue strategic acquisitions for growth.",
+                    image: "https://picsum.photos/seed/business5/400/200.jpg",
+                    link: "https://example.com/mergers",
+                    author: "Jennifer Wu",
+                    date: "8 hours ago",
+                    category: "M&A"
+                },
+                {
+                    id: 13,
+                    title: "Retail Giants Embrace AI for Personalized Shopping",
+                    excerpt: "Major retailers implement artificial intelligence solutions to enhance customer experience and optimize inventory management.",
+                    image: "https://picsum.photos/seed/business6/400/200.jpg",
+                    link: "https://example.com/retail-ai",
+                    author: "Robert Taylor",
+                    date: "10 hours ago",
+                    category: "Retail"
+                },
+                {
+                    id: 14,
+                    title: "Banking Sector Announces Digital Transformation Initiative",
+                    excerpt: "Leading financial institutions commit to $100 billion investment in digital infrastructure over the next five years.",
+                    image: "https://picsum.photos/seed/business7/400/200.jpg",
+                    link: "https://example.com/banking-digital",
+                    author: "Amanda Foster",
+                    date: "12 hours ago",
+                    category: "Banking"
+                },
+                {
+                    id: 15,
+                    title: "Automakers Accelerate EV Production Plans",
+                    excerpt: "Major car manufacturers announce timeline acceleration for electric vehicle models in response to growing demand.",
+                    image: "https://picsum.photos/seed/business8/400/200.jpg",
+                    link: "https://example.com/automotive-ev",
+                    author: "Carlos Rodriguez",
+                    date: "14 hours ago",
+                    category: "Automotive"
+                },
+                {
+                    id: 16,
+                    title: "Pharmaceutical Companies Report Breakthrough in Cancer Treatment",
+                    excerpt: "Clinical trials show promising results for new immunotherapy approach with significantly fewer side effects.",
+                    image: "https://picsum.photos/seed/business9/400/200.jpg",
+                    link: "https://example.com/pharma-breakthrough",
+                    author: "Dr. Elizabeth Park",
+                    date: "16 hours ago",
+                    category: "Healthcare"
+                }
+            ],
+            economic: [
+                {
+                    id: 5,
+                    title: "Inflation Rate Drops to 2.9% in October",
+                    excerpt: "Consumer price index shows continued moderation in inflation, bringing it closer to Federal Reserve's target range.",
+                    image: "https://picsum.photos/seed/economic2/400/200.jpg",
+                    link: "https://example.com/inflation",
+                    author: "Thomas Brown",
+                    date: "2 hours ago",
+                    category: "Inflation"
+                },
+                {
+                    id: 6,
+                    title: "Unemployment Claims Fall to 8-Month Low",
+                    excerpt: "Labor market shows resilience as jobless claims decline, indicating steady economic growth and employment stability.",
+                    image: "https://picsum.photos/seed/economic3/400/200.jpg",
+                    link: "https://example.com/employment",
+                    author: "Maria Garcia",
+                    date: "4 hours ago",
+                    category: "Employment"
+                },
+                {
+                    id: 7,
+                    title: "GDP Growth Revised Upward to 3.2%",
+                    excerpt: "Economy expands faster than initially estimated, driven by strong consumer spending and business investment.",
+                    image: "https://picsum.photos/seed/economic4/400/200.jpg",
+                    link: "https://example.com/gdp",
+                    author: "James Wilson",
+                    date: "7 hours ago",
+                    category: "GDP"
+                },
+                {
+                    id: 8,
+                    title: "Manufacturing Index Shows Strong Expansion",
+                    excerpt: "Factory activity accelerates as new orders and production levels rise, signaling robust industrial sector performance.",
+                    image: "https://picsum.photos/seed/economic5/400/200.jpg",
+                    link: "https://example.com/manufacturing",
+                    author: "Patricia Lee",
+                    date: "9 hours ago",
+                    category: "Manufacturing"
+                },
+                {
+                    id: 17,
+                    title: "Consumer Confidence Reaches Highest Level in Two Years",
+                    excerpt: "Survey shows Americans increasingly optimistic about job prospects and economic conditions despite global uncertainties.",
+                    image: "https://picsum.photos/seed/economic6/400/200.jpg",
+                    link: "https://example.com/consumer-confidence",
+                    author: "Daniel Martinez",
+                    date: "11 hours ago",
+                    category: "Consumer"
+                },
+                {
+                    id: 18,
+                    title: "Housing Market Shows Signs of Stabilization",
+                    excerpt: "Home prices plateau while inventory increases, creating more balanced conditions for buyers and sellers.",
+                    image: "https://picsum.photos/seed/economic7/400/200.jpg",
+                    link: "https://example.com/housing-market",
+                    author: "Rachel Green",
+                    date: "13 hours ago",
+                    category: "Real Estate"
+                },
+                {
+                    id: 19,
+                    title: "Trade Deficit Narrows as Exports Surge",
+                    excerpt: "International trade data shows significant improvement in export performance across multiple sectors.",
+                    image: "https://picsum.photos/seed/economic8/400/200.jpg",
+                    link: "https://example.com/trade-deficit",
+                    author: "Steven Adams",
+                    date: "15 hours ago",
+                    category: "Trade"
+                },
+                {
+                    id: 20,
+                    title: "Central Banks Coordinate on Currency Stabilization",
+                    excerpt: "Major central banks announce joint measures to address excessive volatility in foreign exchange markets.",
+                    image: "https://picsum.photos/seed/economic9/400/200.jpg",
+                    link: "https://example.com/currency-stabilization",
+                    author: "Nina Patel",
+                    date: "17 hours ago",
+                    category: "Currency"
+                }
+            ],
+            market: [
+                {
+                    id: 9,
+                    title: "Cryptocurrency Market Cap Surpasses $2 Trillion",
+                    excerpt: "Digital assets rally as Bitcoin and Ethereum lead gains, institutional adoption drives market expansion.",
+                    image: "https://picsum.photos/seed/market2/400/200.jpg",
+                    link: "https://example.com/crypto",
+                    author: "Alex Turner",
+                    date: "1 hour ago",
+                    category: "Cryptocurrency"
+                },
+                {
+                    id: 10,
+                    title: "Energy Stocks Surge on Oil Price Rally",
+                    excerpt: "Energy sector outperforms as crude oil prices climb to 3-month highs, boosting producer profits.",
+                    image: "https://picsum.photos/seed/market3/400/200.jpg",
+                    link: "https://example.com/energy",
+                    author: "Richard Moore",
+                    date: "3 hours ago",
+                    category: "Energy"
+                },
+                {
+                    id: 11,
+                    title: "Gold Prices Rise Amid Economic Uncertainty",
+                    excerpt: "Safe-haven demand increases as investors seek protection against market volatility and inflation concerns.",
+                    image: "https://picsum.photos/seed/market4/400/200.jpg",
+                    link: "https://example.com/gold",
+                    author: "Susan Martinez",
+                    date: "5 hours ago",
+                    category: "Commodities"
+                },
+                {
+                    id: 12,
+                    title: "Tech Stocks Lead Market Rally",
+                    excerpt: "Nasdaq outperforms as technology giants post strong earnings, driving broader market gains.",
+                    image: "https://picsum.photos/seed/market5/400/200.jpg",
+                    link: "https://example.com/tech-stocks",
+                    author: "Kevin Zhang",
+                    date: "6 hours ago",
+                    category: "Technology"
+                },
+                {
+                    id: 21,
+                    title: "Biotech Stocks Soar on FDA Approval News",
+                    excerpt: "Several biotechnology companies see double-digit gains after receiving regulatory approval for new treatments.",
+                    image: "https://picsum.photos/seed/market6/400/200.jpg",
+                    link: "https://example.com/biotech-stocks",
+                    author: "Dr. Michelle Liu",
+                    date: "8 hours ago",
+                    category: "Biotechnology"
+                },
+                {
+                    id: 22,
+                    title: "Retail Stocks Rise on Strong Holiday Sales Forecast",
+                    excerpt: "Major retailers see stock price increases as analysts predict robust consumer spending during upcoming holiday season.",
+                    image: "https://picsum.photos/seed/market7/400/200.jpg",
+                    link: "https://example.com/retail-stocks",
+                    author: "Brian Thompson",
+                    date: "10 hours ago",
+                    category: "Retail"
+                },
+                {
+                    id: 23,
+                    title: "Financial Sector Outperforms on Interest Rate Outlook",
+                    excerpt: "Banking stocks gain as investors anticipate favorable conditions for financial institutions in coming months.",
+                    image: "https://picsum.photos/seed/market8/400/200.jpg",
+                    link: "https://example.com/financial-stocks",
+                    author: "Sarah Jenkins",
+                    date: "12 hours ago",
+                    category: "Finance"
+                },
+                {
+                    id: 24,
+                    title: "Emerging Markets Attract Record Investment Flows",
+                    excerpt: "International investors shift capital to developing economies seeking higher returns amid global economic rebalancing.",
+                    image: "https://picsum.photos/seed/market9/400/200.jpg",
+                    link: "https://example.com/emerging-markets",
+                    author: "Ahmed Hassan",
+                    date: "14 hours ago",
+                    category: "International"
+                }
+            ]
+        };
+
+        // Market Ticker Data
+        const marketData = [
+            { symbol: 'S&P 500', value: '4,567.18', change: '+1.2%', positive: true },
+            { symbol: 'DOW', value: '35,678.90', change: '+0.8%', positive: true },
+            { symbol: 'NASDAQ', value: '14,235.67', change: '-0.3%', positive: false },
+            { symbol: 'FTSE 100', value: '7,456.23', change: '+0.5%', positive: true },
+            { symbol: 'DAX', value: '15,234.56', change: '+0.7%', positive: true },
+            { symbol: 'NIKKEI', value: '28,456.78', change: '-0.2%', positive: false },
+            { symbol: 'USD/EUR', value: '0.9234', change: '+0.1%', positive: true },
+            { symbol: 'GBP/USD', value: '1.2745', change: '-0.4%', positive: false },
+            { symbol: 'GOLD', value: '$1,945.60', change: '+0.3%', positive: true },
+            { symbol: 'OIL', value: '$78.45', change: '+1.5%', positive: true },
+            { symbol: 'BITCOIN', value: '$43,567', change: '+2.3%', positive: true },
+            { symbol: '10Y YIELD', value: '4.25%', change: '-0.05%', positive: false }
+        ];
+
+        // Breaking News Data
+        const breakingNewsData = [
+            "Federal Reserve Chair announces upcoming policy changes in press conference",
+            "Tech stocks surge as AI companies report better-than-expected earnings",
+            "European Central Bank maintains interest rates amid economic uncertainty",
+            "Oil prices climb as OPEC+ extends production cuts through end of year",
+            "Housing market shows signs of cooling as mortgage rates remain elevated"
+        ];
+
+        // Initialize Market Ticker
+        function initMarketTicker() {
+            const tickerContainer = document.getElementById('marketTicker');
+            
+            // Create two sets of ticker items for continuous scrolling
+            const tickerHTML = marketData.concat(marketData).map(item => `
+                <div class="ticker-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>${item.symbol}</span>
+                    <span>${item.value}</span>
+                    <span class="ticker-change ${item.positive ? 'positive' : 'negative'}">
+                        <i class="fas fa-arrow-${item.positive ? 'up' : 'down'}"></i> ${item.change}
+                    </span>
+                </div>
+            `).join('');
+            
+            tickerContainer.innerHTML = tickerHTML;
+        }
+
+        // Initialize Breaking News
+        function initBreakingNews() {
+            const breakingNewsContainer = document.getElementById('breakingNews');
+            
+            // Create two sets of breaking news for continuous scrolling
+            const breakingNewsHTML = breakingNewsData.concat(breakingNewsData).map(item => `
+                <div class="breaking-news-item">
+                    ${item}
+                </div>
+            `).join('');
+            
+            breakingNewsContainer.innerHTML = breakingNewsHTML;
+        }
+
+        // Render Articles Function
+        function renderArticles(category) {
+            const container = document.getElementById(`${category}Articles`);
+            const articles = articlesData[category] || [];
+
+            container.innerHTML = articles.map(article => `
+                <a href="${article.link}" class="article-card" target="_blank">
+                    <div class="article-image">
+                        <img src="${article.image}" alt="${article.title}">
+                        <span class="article-category-badge">${article.category}</span>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">${article.title}</h3>
+                        <p class="article-excerpt">${article.excerpt}</p>
+                        <div class="article-footer">
+                            <span class="article-author">
+                                <i class="fas fa-user"></i> ${article.author}
+                            </span>
+                            <span class="article-time">
+                                <i class="fas fa-clock"></i> ${article.date}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // Update date and time
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', dateOptions);
+        }
+
+        // Update Market Data (Simulated Live Updates)
+        function updateMarketData() {
+            marketData.forEach(item => {
+                // Randomly update values
+                const changeAmount = (Math.random() * 0.4 - 0.2).toFixed(2);
+                const newChange = (parseFloat(item.change.replace('%', '')) + parseFloat(changeAmount)).toFixed(1);
+                item.change = (newChange > 0 ? '+' : '') + newChange + '%';
+                item.positive = newChange > 0;
+                
+                // Update value slightly
+                if (item.symbol !== 'USD/EUR' && item.symbol !== 'GBP/USD' && item.symbol !== '10Y YIELD') {
+                    const valueChange = (Math.random() * 20 - 10).toFixed(2);
+                    const currentValue = parseFloat(item.value.replace(/[^0-9.-]/g, ''));
+                    const newValue = (currentValue + parseFloat(valueChange)).toFixed(2);
+                    
+                    if (item.symbol === 'GOLD' || item.symbol === 'OIL' || item.symbol === 'BITCOIN') {
+                        item.value = item.symbol === 'BITCOIN' ? '$' + newValue : '$' + newValue;
+                    } else {
+                        item.value = newValue.includes('.') ? newValue : newValue + '.00';
+                    }
+                }
+            });
+            
+            // Re-render ticker with updated data
+            initMarketTicker();
+        }
+
+        // Initialize all components
+        function initializeAll() {
+            initMarketTicker();
+            initBreakingNews();
+            renderArticles('business');
+            renderArticles('economic');
+            renderArticles('market');
+            updateDateTime();
+            
+            // Update market data every 5 seconds to simulate live updates
+            setInterval(updateMarketData, 5000);
+            
+            // Update time every second
+            setInterval(updateDateTime, 1000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAll();
+
+            // Handle tab switching
+            document.querySelectorAll('a[data-bs-toggle="tab"]').forEach(tab => {
+                tab.addEventListener('shown.bs.tab', function(e) {
+                    const target = e.target.getAttribute('href').replace('#', '');
+                    if (['business', 'economic', 'market'].includes(target)) {
+                        renderArticles(target);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
