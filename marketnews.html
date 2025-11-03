@@ -295,62 +295,6 @@
             50% { opacity: 0.3; }
         }
 
-        /* Navigation Tabs - More Subtle */
-        .nav-wrapper {
-            background: var(--bg-white);
-            border-top: 1px solid var(--border-color);
-            padding: 0;
-        }
-
-        .nav-tabs-custom {
-            display: flex;
-            gap: 0;
-            border: none;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            justify-content: center;
-        }
-
-        .nav-tabs-custom .nav-item {
-            position: relative;
-        }
-
-        .nav-tabs-custom .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 12px 24px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            border: none;
-            background: transparent;
-            position: relative;
-        }
-
-        .nav-tabs-custom .nav-link:hover {
-            color: var(--primary-blue);
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        .nav-tabs-custom .nav-link.active {
-            color: var(--primary-blue);
-            background: transparent;
-        }
-
-        .nav-tabs-custom .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--primary-blue);
-        }
-
         /* Article Page Styles */
         .article-container {
             max-width: 900px;
@@ -998,11 +942,6 @@
             .related-articles-grid {
                 grid-template-columns: 1fr;
             }
-
-            .nav-tabs-custom .nav-link {
-                padding: 10px 15px;
-                font-size: 13px;
-            }
         }
     </style>
 </head>
@@ -1077,34 +1016,6 @@
                     </div>
                 </div>
             </header>
-
-            <!-- Navigation -->
-            <nav class="nav-wrapper">
-                <div class="container">
-                    <ul class="nav-tabs-custom" id="mainTabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#business" data-bs-toggle="tab">
-                                <i class="fas fa-briefcase"></i> Business
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#economic" data-bs-toggle="tab">
-                                <i class="fas fa-coins"></i> Economic
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#market" data-bs-toggle="tab">
-                                <i class="fas fa-chart-bar"></i> Market
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#about" data-bs-toggle="tab">
-                                <i class="fas fa-info-circle"></i> About
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
 
             <!-- Article Content -->
             <div class="article-container">
@@ -1188,58 +1099,8 @@
                     <div class="related-articles-header">
                         <h2 class="related-articles-title">Related Articles</h2>
                     </div>
-                    <div class="related-articles-grid">
-                        <a href="#" class="related-article-card">
-                            <div class="related-article-image">
-                                <img src="https://picsum.photos/seed/oil-prices-surge/400/200.jpg" alt="Oil prices surge">
-                            </div>
-                            <div class="related-article-content">
-                                <h3 class="related-article-title">Oil Prices Surge to Three-Month Highs Following Pipeline Attack</h3>
-                                <p class="related-article-excerpt">Brent crude approaches $90 per barrel as markets assess supply disruption risks</p>
-                                <div class="related-article-footer">
-                                    <span class="related-article-author">
-                                        <i class="fas fa-user"></i> Maria Petrov
-                                    </span>
-                                    <span class="related-article-time">
-                                        <i class="fas fa-clock"></i> 2 hours ago
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="related-article-card">
-                            <div class="related-article-image">
-                                <img src="https://picsum.photos/seed/eu-energy-security/400/200.jpg" alt="EU energy security">
-                            </div>
-                            <div class="related-article-content">
-                                <h3 class="related-article-title">EU Activates Strategic Petroleum Reserves Amid Supply Concerns</h3>
-                                <p class="related-article-excerpt">Brussels calls emergency meeting of energy ministers to coordinate response</p>
-                                <div class="related-article-footer">
-                                    <span class="related-article-author">
-                                        <i class="fas fa-user"></i> Hans Mueller
-                                    </span>
-                                    <span class="related-article-time">
-                                        <i class="fas fa-clock"></i> 3 hours ago
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="#" class="related-article-card">
-                            <div class="related-article-image">
-                                <img src="https://picsum.photos/seed/russian-energy-infrastructure/400/200.jpg" alt="Russian energy infrastructure">
-                            </div>
-                            <div class="related-article-content">
-                                <h3 class="related-article-title">Analysis: Ukraine's Evolving Strategy Against Russian Energy Infrastructure</h3>
-                                <p class="related-article-excerpt">From storage depots to export pipelines: The expanding scope of Ukrainian attacks</p>
-                                <div class="related-article-footer">
-                                    <span class="related-article-author">
-                                        <i class="fas fa-user"></i> Alexandra Chen
-                                    </span>
-                                    <span class="related-article-time">
-                                        <i class="fas fa-clock"></i> 5 hours ago
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
+                    <div class="related-articles-grid" id="relatedArticlesGrid">
+                        <!-- Related articles will be inserted here by JavaScript -->
                     </div>
                 </div>
 
@@ -1365,6 +1226,256 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Article Data from Home Page
+        const articlesData = {
+            business: [
+                {
+                    id: 1,
+                    title: "Startups Raise $50B in Q3 Funding",
+                    excerpt: "Venture capital investments surge as technology startups attract record funding, with AI and clean energy sectors leading.",
+                    image: "https://picsum.photos/seed/business2/400/200.jpg",
+                    link: "https://example.com/startup-funding",
+                    author: "Michael Chen",
+                    date: "3 hours ago",
+                    category: "Venture Capital"
+                },
+                {
+                    id: 2,
+                    title: "Supply Chain Recovery Exceeds Expectations",
+                    excerpt: "Recent data shows significant improvements in logistics and shipping efficiency, reducing costs worldwide.",
+                    image: "https://picsum.photos/seed/business3/400/200.jpg",
+                    link: "https://example.com/supply-chain",
+                    author: "Lisa Anderson",
+                    date: "5 hours ago",
+                    category: "Logistics"
+                },
+                {
+                    id: 3,
+                    title: "Corporate Earnings Beat Analyst Predictions",
+                    excerpt: "Major corporations report stronger-than-expected quarterly results, driven by consumer spending.",
+                    image: "https://picsum.photos/seed/business4/400/200.jpg",
+                    link: "https://example.com/earnings",
+                    author: "David Kim",
+                    date: "6 hours ago",
+                    category: "Earnings"
+                },
+                {
+                    id: 4,
+                    title: "Merger Activity Surges to Pre-Pandemic Levels",
+                    excerpt: "M&A transactions reach highest levels in three years as companies pursue strategic acquisitions.",
+                    image: "https://picsum.photos/seed/business5/400/200.jpg",
+                    link: "https://example.com/mergers",
+                    author: "Jennifer Wu",
+                    date: "8 hours ago",
+                    category: "M&A"
+                },
+                {
+                    id: 13,
+                    title: "Retail Giants Embrace AI for Shopping",
+                    excerpt: "Major retailers implement artificial intelligence solutions to enhance customer experience.",
+                    image: "https://picsum.photos/seed/business6/400/200.jpg",
+                    link: "https://example.com/retail-ai",
+                    author: "Robert Taylor",
+                    date: "10 hours ago",
+                    category: "Retail"
+                },
+                {
+                    id: 14,
+                    title: "Banking Sector Digital Transformation Initiative",
+                    excerpt: "Leading financial institutions commit to $100 billion investment in digital infrastructure.",
+                    image: "https://picsum.photos/seed/business7/400/200.jpg",
+                    link: "https://example.com/banking-digital",
+                    author: "Amanda Foster",
+                    date: "12 hours ago",
+                    category: "Banking"
+                },
+                {
+                    id: 15,
+                    title: "Automakers Accelerate EV Production Plans",
+                    excerpt: "Major car manufacturers announce timeline acceleration for electric vehicle models.",
+                    image: "https://picsum.photos/seed/business8/400/200.jpg",
+                    link: "https://example.com/automotive-ev",
+                    author: "Carlos Rodriguez",
+                    date: "14 hours ago",
+                    category: "Automotive"
+                },
+                {
+                    id: 16,
+                    title: "Pharma Breakthrough in Cancer Treatment",
+                    excerpt: "Clinical trials show promising results for new immunotherapy approach with fewer side effects.",
+                    image: "https://picsum.photos/seed/business9/400/200.jpg",
+                    link: "https://example.com/pharma-breakthrough",
+                    author: "Dr. Elizabeth Park",
+                    date: "16 hours ago",
+                    category: "Healthcare"
+                }
+            ],
+            economic: [
+                {
+                    id: 5,
+                    title: "Inflation Rate Drops to 2.9% in October",
+                    excerpt: "Consumer price index shows continued moderation in inflation, bringing it closer to Federal Reserve's target.",
+                    image: "https://picsum.photos/seed/economic2/400/200.jpg",
+                    link: "https://example.com/inflation",
+                    author: "Thomas Brown",
+                    date: "2 hours ago",
+                    category: "Inflation"
+                },
+                {
+                    id: 6,
+                    title: "Unemployment Claims Fall to 8-Month Low",
+                    excerpt: "Labor market shows resilience as jobless claims decline, indicating steady economic growth.",
+                    image: "https://picsum.photos/seed/economic3/400/200.jpg",
+                    link: "https://example.com/employment",
+                    author: "Maria Garcia",
+                    date: "4 hours ago",
+                    category: "Employment"
+                },
+                {
+                    id: 7,
+                    title: "GDP Growth Revised Upward to 3.2%",
+                    excerpt: "Economy expands faster than initially estimated, driven by strong consumer spending.",
+                    image: "https://picsum.photos/seed/economic4/400/200.jpg",
+                    link: "https://example.com/gdp",
+                    author: "James Wilson",
+                    date: "7 hours ago",
+                    category: "GDP"
+                },
+                {
+                    id: 8,
+                    title: "Manufacturing Index Shows Strong Expansion",
+                    excerpt: "Factory activity accelerates as new orders and production levels rise.",
+                    image: "https://picsum.photos/seed/economic5/400/200.jpg",
+                    link: "https://example.com/manufacturing",
+                    author: "Patricia Lee",
+                    date: "9 hours ago",
+                    category: "Manufacturing"
+                },
+                {
+                    id: 17,
+                    title: "Consumer Confidence at Two-Year High",
+                    excerpt: "Survey shows Americans increasingly optimistic about job prospects and economic conditions.",
+                    image: "https://picsum.photos/seed/economic6/400/200.jpg",
+                    link: "https://example.com/consumer-confidence",
+                    author: "Daniel Martinez",
+                    date: "11 hours ago",
+                    category: "Consumer"
+                },
+                {
+                    id: 18,
+                    title: "Housing Market Shows Stabilization",
+                    excerpt: "Home prices plateau while inventory increases, creating more balanced conditions.",
+                    image: "https://picsum.photos/seed/economic7/400/200.jpg",
+                    link: "https://example.com/housing-market",
+                    author: "Rachel Green",
+                    date: "13 hours ago",
+                    category: "Real Estate"
+                },
+                {
+                    id: 19,
+                    title: "Trade Deficit Narrows as Exports Surge",
+                    excerpt: "International trade data shows significant improvement in export performance.",
+                    image: "https://picsum.photos/seed/economic8/400/200.jpg",
+                    link: "https://example.com/trade-deficit",
+                    author: "Steven Adams",
+                    date: "15 hours ago",
+                    category: "Trade"
+                },
+                {
+                    id: 20,
+                    title: "Central Banks Coordinate on Currency Stability",
+                    excerpt: "Major central banks announce joint measures to address foreign exchange volatility.",
+                    image: "https://picsum.photos/seed/economic9/400/200.jpg",
+                    link: "https://example.com/currency-stabilization",
+                    author: "Nina Patel",
+                    date: "17 hours ago",
+                    category: "Currency"
+                }
+            ],
+            market: [
+                {
+                    id: 9,
+                    title: "Crypto Market Cap Surpasses $2 Trillion",
+                    excerpt: "Digital assets rally as Bitcoin and Ethereum lead gains, institutional adoption drives expansion.",
+                    image: "https://picsum.photos/seed/market2/400/200.jpg",
+                    link: "https://example.com/crypto",
+                    author: "Alex Turner",
+                    date: "1 hour ago",
+                    category: "Cryptocurrency"
+                },
+                {
+                    id: 10,
+                    title: "Energy Stocks Surge on Oil Price Rally",
+                    excerpt: "Energy sector outperforms as crude oil prices climb to 3-month highs, boosting profits.",
+                    image: "https://picsum.photos/seed/market3/400/200.jpg",
+                    link: "https://example.com/energy",
+                    author: "Richard Moore",
+                    date: "3 hours ago",
+                    category: "Energy"
+                },
+                {
+                    id: 11,
+                    title: "Gold Prices Rise Amid Economic Uncertainty",
+                    excerpt: "Safe-haven demand increases as investors seek protection against market volatility.",
+                    image: "https://picsum.photos/seed/market4/400/200.jpg",
+                    link: "https://example.com/gold",
+                    author: "Susan Martinez",
+                    date: "5 hours ago",
+                    category: "Commodities"
+                },
+                {
+                    id: 12,
+                    title: "Tech Stocks Lead Market Rally",
+                    excerpt: "Nasdaq outperforms as technology giants post strong earnings, driving broader gains.",
+                    image: "https://picsum.photos/seed/market5/400/200.jpg",
+                    link: "https://example.com/tech-stocks",
+                    author: "Kevin Zhang",
+                    date: "6 hours ago",
+                    category: "Technology"
+                },
+                {
+                    id: 21,
+                    title: "Biotech Stocks Soar on FDA Approval News",
+                    excerpt: "Several biotechnology companies see double-digit gains after regulatory approvals.",
+                    image: "https://picsum.photos/seed/market6/400/200.jpg",
+                    link: "https://example.com/biotech-stocks",
+                    author: "Dr. Michelle Liu",
+                    date: "8 hours ago",
+                    category: "Biotechnology"
+                },
+                {
+                    id: 22,
+                    title: "Retail Stocks Rise on Holiday Sales Forecast",
+                    excerpt: "Major retailers see stock price increases as analysts predict robust consumer spending.",
+                    image: "https://picsum.photos/seed/market7/400/200.jpg",
+                    link: "https://example.com/retail-stocks",
+                    author: "Brian Thompson",
+                    date: "10 hours ago",
+                    category: "Retail"
+                },
+                {
+                    id: 23,
+                    title: "Financial Sector Outperforms on Rate Outlook",
+                    excerpt: "Banking stocks gain as investors anticipate favorable conditions for institutions.",
+                    image: "https://picsum.photos/seed/market8/400/200.jpg",
+                    link: "https://example.com/financial-stocks",
+                    author: "Sarah Jenkins",
+                    date: "12 hours ago",
+                    category: "Finance"
+                },
+                {
+                    id: 24,
+                    title: "Emerging Markets Attract Record Investment",
+                    excerpt: "International investors shift capital to developing economies seeking higher returns.",
+                    image: "https://picsum.photos/seed/market9/400/200.jpg",
+                    link: "https://example.com/emerging-markets",
+                    author: "Ahmed Hassan",
+                    date: "14 hours ago",
+                    category: "International"
+                }
+            ]
+        };
+
         // Market Ticker Data
         const marketData = [
             { symbol: 'S&P 500', value: '4,567.18', change: '+1.2%', positive: true },
@@ -1380,6 +1491,73 @@
             { symbol: 'BITCOIN', value: '$43,567', change: '+2.3%', positive: true },
             { symbol: '10Y YIELD', value: '4.25%', change: '-0.05%', positive: false }
         ];
+
+        // Function to get related articles based on current article topic
+        function getRelatedArticles() {
+            // Keywords related to the current article
+            const energyKeywords = ['energy', 'oil', 'gas', 'pipeline', 'commodities', 'market', 'stocks', 'economic'];
+            
+            // Combine all articles from all categories
+            const allArticles = [
+                ...articlesData.business,
+                ...articlesData.economic,
+                ...articlesData.market
+            ];
+            
+            // Filter and score articles based on relevance
+            const scoredArticles = allArticles.map(article => {
+                let score = 0;
+                const titleAndExcerpt = (article.title + ' ' + article.excerpt).toLowerCase();
+                
+                // Check for energy-related keywords
+                energyKeywords.forEach(keyword => {
+                    if (titleAndExcerpt.includes(keyword)) {
+                        score += 1;
+                    }
+                });
+                
+                // Bonus for specific categories
+                if (article.category === 'Energy' || article.category === 'Commodities') {
+                    score += 3;
+                }
+                if (article.category === 'Market' || article.category === 'International') {
+                    score += 2;
+                }
+                
+                return { ...article, score };
+            });
+            
+            // Sort by score and take top 3
+            return scoredArticles
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 3);
+        }
+
+        // Render Related Articles
+        function renderRelatedArticles() {
+            const relatedArticles = getRelatedArticles();
+            const container = document.getElementById('relatedArticlesGrid');
+            
+            container.innerHTML = relatedArticles.map(article => `
+                <a href="${article.link}" class="related-article-card" target="_blank">
+                    <div class="related-article-image">
+                        <img src="${article.image}" alt="${article.title}">
+                    </div>
+                    <div class="related-article-content">
+                        <h3 class="related-article-title">${article.title}</h3>
+                        <p class="related-article-excerpt">${article.excerpt}</p>
+                        <div class="related-article-footer">
+                            <span class="related-article-author">
+                                <i class="fas fa-user"></i> ${article.author}
+                            </span>
+                            <span class="related-article-time">
+                                <i class="fas fa-clock"></i> ${article.date}
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
 
         // Initialize Market Ticker
         function initMarketTicker() {
@@ -1438,6 +1616,7 @@
         // Initialize all components
         function initializeAll() {
             initMarketTicker();
+            renderRelatedArticles();
             updateDateTime();
             
             // Update market data every 5 seconds to simulate live updates
